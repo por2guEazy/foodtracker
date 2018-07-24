@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.forms import ModelForm, DateTimeInput
-from django.contrib.admin.widgets import AdminDateWidget
 
 
 class UserProfile(models.Model):
@@ -22,9 +21,3 @@ class FoodItem(models.Model):
         return self.item
 
 
-
-class AddItem(ModelForm):
-    class Meta:
-        model = FoodItem
-        widgets = {'date_added': DateTimeInput(attrs={'class': 'datepicker'})}
-        fields = ['item', 'date_added']
