@@ -38,11 +38,12 @@
                   {% endfor %}
                   </ul>
               </div>
-              <form class="col" method="post" action="post">
+              <form class="col" method="post">
                   <h4>Add Items to List</h4>
+                  {% csrf_token %}
                   {{ add_form }}
                   <div class="mt-5">
-                      <button type="button" class="btn btn-outline-danger">Add Food Item</button>
+                      <button type="submit" class="btn btn-outline-danger">Add Food Item</button>
                   </div>
               </form>
           </div>
