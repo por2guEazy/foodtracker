@@ -2,9 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 
-from .forms import AddItem
+from .forms import AddItem, EditProfile
 from .models import FoodItem
-
 
 # Index view - required login 
 @login_required(login_url='/food/login/')
@@ -46,5 +45,22 @@ def index(request):
 
 
 
+def profile(request):
+    view = 'food/profile.html'
+    user_data = EditProfile()
+    bmi = 0
+    if request.method == 'POST':
+        user_data = EditProfile(request.POST)
+        if user_data.is_valid():
+            height = user_data.cleaned_data['height']
+            weight = user_data.cleaned_data['weight']
+            print(f"USER DATA: Height {height} Weight {weight}"  )
+            # Round to two decimal places
+            bmi = "Your BMI is: " + str(round( ((weight) / (height**2)) * 703, 2))
+    context = { 
+            'bmi': bmi,
+            'user_data_form': user_data 
+    } 
+    return render(request, view, context)
 
 

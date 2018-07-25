@@ -10,12 +10,12 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-    
-    <link rel="stylesheet" href="{% static 'food/jquery.datetimepicker.min.css' %}"> 
+
+    <link rel="stylesheet" href="{% static 'food/jquery.datetimepicker.min.css' %}">
     <!-- Load Favicon -->
     <link rel="icon" href="{% static 'food/favicon.png' %}" type="img/png"/>
 
-    <title>Food Tracker</title>
+    <title>Profile</title>
   </head>
   <body>
       <nav class="navbar navbar-dark bg-dark">
@@ -24,31 +24,24 @@
         </nav>
       <div class="jumbotron jumbotron-fluid">
           <div class="container-fluid">
-              <h1 class="display-4">Track the food that {{user.get_username }} has eaten</h1>
-                <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+              <h1 class="display-4">Profile {{user.get_username }}</h1>
+                <p class="lead">This is a modified jumbotron that occupies</p>
           </div>
       </div>
       <div class="container">
           <div class="row">
               <div class="col">
-                  <h4>ITEMS EATEN</h4>
-                  <ul>
-                  {% for item in latest_food_items %}
-                      <li>{{ item.item }}</li>
-                  {% endfor %}
-                  </ul>
+                    {{ bmi }}
+                  
               </div>
-              <form class="col" method="post" action="{% url 'index' %}">
-                  <h4>Add Items to List</h4>
+              <form class="col" method="post">
                   {% csrf_token %}
-                  {{ add_form }}
-                  <div class="mt-5">
-                      <button type="submit" class="btn btn-outline-danger">Add Food Item</button>
-                  </div>
+                  {{ user_data_form.as_p }} 
+                  <button class="btn btn-danger" type="submit">OK</button>
               </form>
           </div>
       </div>
-    
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

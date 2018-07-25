@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 class UserProfile(models.Model):
     # Don't need to add unique=True because one-one does that
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    height = models.IntegerField(default=0)
-    weight = models.IntegerField(default=0)
+    height = models.PositiveIntegerField(default=0)
+    weight = models.PositiveIntegerField(default=0)
 
 
 # Model for food eaten item to add to list
