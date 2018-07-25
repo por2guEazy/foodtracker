@@ -3,11 +3,13 @@ from django.contrib.auth.models import User
 
 
 class UserProfile(models.Model):
-    # Don't need to add unique=True because one-one does that
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     height = models.PositiveIntegerField(default=0)
     weight = models.PositiveIntegerField(default=0)
 
+
+    def __str__(self):
+        return '%s %s' % (self.height, self.weight)
 
 # Model for food eaten item to add to list
 # Add more fields later to better classify

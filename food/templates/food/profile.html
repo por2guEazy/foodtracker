@@ -24,17 +24,20 @@
         </nav>
       <div class="jumbotron jumbotron-fluid">
           <div class="container-fluid">
-              <h1 class="display-4">Profile {{user.get_username }}</h1>
+              <h1 class="display-4">Profile: {{user.get_username }}</h1>
                 <p class="lead">This is a modified jumbotron that occupies</p>
           </div>
       </div>
       <div class="container">
           <div class="row">
               <div class="col">
-                    {{ bmi }}
-                  
+                  <h2> Personal Info: {{ user }} </h2> 
+                    <p>Height: {{ user_info.height }} </p>
+                    <p>Weight: {{ user_info.weight }} </p>
+                    <p>BMI: {{ bmi }} </p>
               </div>
               <form class="col" method="post">
+              <h2> Update Info </h2>
                   {% csrf_token %}
                   {{ user_data_form.as_p }} 
                   <button class="btn btn-danger" type="submit">OK</button>
