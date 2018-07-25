@@ -4,22 +4,18 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Load Static -- >
     {% load static %}
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-
     <link rel="stylesheet" href="{% static 'food/jquery.datetimepicker.min.css' %}">
     <!-- Load Favicon -->
     <link rel="icon" href="{% static 'food/favicon.png' %}" type="img/png"/>
-
     <title>Profile</title>
   </head>
   <body>
       <nav class="navbar navbar-dark bg-dark">
-            <span class="navbar-brand mb-0 h1">FOOD TRACKER</span>
+          <a href="{% url 'index' %}"><span class="navbar-brand mb-0 h1">FOOD TRACKER</span> </a>
             <a href="logout" ><button type="submit" class="btn btn-outline-secondary float-right">Logout</button> </a>
         </nav>
       <div class="jumbotron jumbotron-fluid">
@@ -32,9 +28,9 @@
           <div class="row">
               <div class="col">
                   <h2> Personal Info: {{ user }} </h2> 
-                    <p>Height: {{ user_info.height }} </p>
-                    <p>Weight: {{ user_info.weight }} </p>
-                    <p>BMI: {{ bmi }} </p>
+                    <p>Height: {{ user_info.height }}"</p>
+                    <p>Weight: {{ user_info.weight }} lbs</p>
+                    <p>BMI: {{ bmi }}</p>
               </div>
               <form class="col" method="post">
               <h2> Update Info </h2>
@@ -44,9 +40,6 @@
               </form>
           </div>
       </div>
-
-
-    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
