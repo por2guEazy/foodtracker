@@ -20,3 +20,10 @@ class EditProfile(ModelForm):
     class Meta:
         model = UserProfile
         fields = ['height', 'weight']
+
+
+
+# Select menu to view items by choice
+class ViewItemsByDate(forms.Form):
+    options = (('today', 'Today'), ('yesterday', 'Yesterday'), ('last-week', 'Last Week'))
+    field = forms.ChoiceField(label='', choices=options)

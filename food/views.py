@@ -1,10 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
+import datetime
 from datetime import timedelta
 from django.utils import timezone
 
-from .forms import AddItem, EditProfile
+from .forms import AddItem, EditProfile, ViewItemsByDate
 from .models import FoodItem, UserProfile
 
 
@@ -13,11 +14,29 @@ from .models import FoodItem, UserProfile
 def index(request):
     view = 'food/index.html'
     # Get a list of food based on specific user that is logged in
-    food_list = FoodItem.objects.filter(user_id=request.user).order_by('-date_added')
-    # Create form
+    # Display items eaten today 
+    food_list = FoodItem.objects.filter(
+            user_id=request.user, 
+            date_added__gte=datetime.datetime.today().replace(hour=0, minute=0).astimezone()
+    )    
+    # Create forms for page
     add_item_form = AddItem()
+    view_items_by_date = ViewItemsByDate()
+   
+    # Get input
+    show_by = request.GET.get('')
+    print(view_items_for)
+    # Handle view items by date form
+    if request.method == 'GET':
+        context = {
+            'latest_food_items': food_list,
+            'add_form': add_item_form,
+            'view_by_date_form': view_items_by_date, 
+        }
+        return render(request, view, context)
 
-
+    
+    # Handle add items by date form
     if request.method == 'POST':
         add_item_form = AddItem(request.POST)
         # Validate data
