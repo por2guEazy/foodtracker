@@ -1,46 +1,38 @@
+<!-- Load Static -- >
+{% load static %}
 <!doctype html>
 <html lang="en">
+  {% block head %}
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Load Static -- >
-    {% load static %}
-    <!-- Bootstrap CSS -->
+        <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'food/jquery.datetimepicker.min.css' %}">
+    <link rel="stylesheet" href="{% static 'food/jquery.datetimepicker.min.css' %}"> 
     <!-- Load Favicon -->
     <link rel="icon" href="{% static 'food/favicon.png' %}" type="img/png"/>
-    <title>Profile</title>
   </head>
+
+  {% end head %}
   <body>
+      {% block nav %}
       <nav class="navbar navbar-dark bg-dark">
           <a href="{% url 'index' %}"><span class="navbar-brand mb-0 h1">FOOD TRACKER</span> </a>
+          <div class="container">
+            <a href="{% url 'profile' %}">{{ user.get_username }}'s profile</a>
+          </div>
             <a href="logout" ><button type="submit" class="btn btn-outline-secondary float-right">Logout</button> </a>
         </nav>
+        {% endblock %}
+        {% block body %}
       <div class="jumbotron jumbotron-fluid">
           <div class="container-fluid">
-              <h1 class="display-4">Profile: {{user.get_username }}</h1>
-                <p class="lead">This is a modified jumbotron that occupies</p>
+              <h1 class="display-4">Track the food that {{user.get_username }} has eaten</h1>
+                <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
           </div>
       </div>
-      <div class="container">
-          <div class="row">
-              <div class="col">
-                  <h2> Personal Info: {{ user }} </h2> 
-                    <p>Height: {{ user_info.height }}"</p>
-                    <p>Weight: {{ user_info.weight }} lbs</p>
-                    <p>BMI: {{ bmi }}</p>
-                    <button class="btn btn-secondary show-edit-profile"> Edit</button>
-              </div>
-              <form class="col d-none edit-profile" method="post">
-              <h2> Update Info </h2>
-                  {% csrf_token %}
-                  {{ user_data_form.as_p }} 
-                  <button class="btn btn-secondary edit-profile-submit" type="submit">OK</button>
-              </form>
-          </div>
-      </div>
+    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -48,4 +40,5 @@
     <script src="{% static 'food/jquery.datetimepicker.full.min.js' %}"></script>
     <script src="{% static 'food/index.js' %}"></script>
   </body>
+  {% endblock %}
 </html>

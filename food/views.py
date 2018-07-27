@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
+from datetime import timedelta
+from django.utils import timezone
 
 from .forms import AddItem, EditProfile
 from .models import FoodItem, UserProfile
@@ -35,6 +37,13 @@ def index(request):
 
     return render(request, view, context)
 
+def get_bmi(height, weight):
+    if height == 0:
+        bmi = 'N/A'
+    else:
+        bmi = str(round( ((weight) / (height**2)) * 703, 2))
+
+    return bmi
 
 # Profile view w/ required login
 @login_required(login_url='/food/login/')
@@ -43,9 +52,9 @@ def profile(request):
     # Make query to get user info
     user_info = UserProfile.objects.filter(user_id=request.user).first()
     # Create form 
-    form_data = EditProfile(instance=user_info)
+    form_data = EditProfile()
     # Calculate & round BMI to 2 decimals 
-    bmi = str(round( ((user_info.weight) / (user_info.height**2)) * 703, 2))
+
 
     if request.method == 'POST':
         # Check if that instance exists, update or save new data
@@ -55,18 +64,20 @@ def profile(request):
             item =  form_data.save(commit=False)
             item.user = request.user
             item.save()
-           
+             
             context = { 
-                'bmi': bmi,
+                'bmi': get_bmi(user_info.height, user_info.weight),
                 'user_data_form': form_data, 
                 'user_info': user_info,
             }
+            
+            return render(request, view, context)
 
-    else:
-        context = { 
-                'bmi': bmi,
-                'user_data_form': form_data,
-                'user_info': user_info,
-        } 
+  
+    context = { 
+            'bmi': get_bmi(user_info.height, user_info.weight),
+            'user_data_form': form_data,
+            'user_info': user_info,
+    } 
 
     return render(request, view, context)

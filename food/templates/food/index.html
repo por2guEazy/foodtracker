@@ -20,6 +20,9 @@
   <body>
       <nav class="navbar navbar-dark bg-dark">
           <a href="{% url 'index' %}"><span class="navbar-brand mb-0 h1">FOOD TRACKER</span> </a>
+          <div class="container">
+            <a href="{% url 'profile' %}">{{ user.get_username }}'s profile</a>
+          </div>
             <a href="logout" ><button type="submit" class="btn btn-outline-secondary float-right">Logout</button> </a>
         </nav>
       <div class="jumbotron jumbotron-fluid">

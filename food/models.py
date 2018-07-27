@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    height = models.PositiveIntegerField(default=0)
-    weight = models.PositiveIntegerField(default=0)
+    height = models.PositiveIntegerField()
+    weight = models.PositiveIntegerField()
 
 
     def __str__(self):
