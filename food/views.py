@@ -17,6 +17,7 @@ def index(request):
     # Create form
     add_item_form = AddItem()
 
+
     if request.method == 'POST':
         add_item_form = AddItem(request.POST)
         # Validate data
@@ -29,14 +30,18 @@ def index(request):
                 'latest_food_items': food_list,
                 'add_form': add_item_form, 
             }
-    else:
-        context = {
-            'latest_food_items': food_list,
-            'add_form': add_item_form, 
-        }            
+            return render(request, view, context)
+
+    context = {
+        'latest_food_items': food_list,
+        'add_form': add_item_form, 
+    }            
 
     return render(request, view, context)
 
+
+
+# Calculate BMI
 def get_bmi(height, weight):
     if height == 0:
         bmi = 'N/A'
@@ -44,6 +49,8 @@ def get_bmi(height, weight):
         bmi = str(round( ((weight) / (height**2)) * 703, 2))
 
     return bmi
+
+
 
 # Profile view w/ required login
 @login_required(login_url='/food/login/')

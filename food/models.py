@@ -15,7 +15,7 @@ class UserProfile(models.Model):
 # Add more fields later to better classify
 class FoodItem(models.Model):
     item = models.CharField(max_length=50)
-    date_added = models.DateTimeField('Date added')
+    date_added = models.DateTimeField('Date Added')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
