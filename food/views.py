@@ -12,30 +12,7 @@ from .models import FoodItem, UserProfile
 # Index view - required login 
 @login_required(login_url='/food/login/')
 def index(request):
-    view = 'food/index.html'
-    # Get a list of food based on specific user that is logged in
-    # Display items eaten today 
-    food_list = FoodItem.objects.filter(
-            user_id=request.user, 
-            date_added__gte=datetime.datetime.today().replace(hour=0, minute=0).astimezone()
-    )    
-    # Create forms for page
-    add_item_form = AddItem()
-    view_items_by_date = ViewItemsByDate()
-   
-    # Get input
-    show_by = request.GET.get('')
-    print(view_items_for)
-    # Handle view items by date form
-    if request.method == 'GET':
-        context = {
-            'latest_food_items': food_list,
-            'add_form': add_item_form,
-            'view_by_date_form': view_items_by_date, 
-        }
-        return render(request, view, context)
-
-    
+        
     # Handle add items by date form
     if request.method == 'POST':
         add_item_form = AddItem(request.POST)
@@ -45,18 +22,31 @@ def index(request):
             item.user = request.user
             item.save()
             
-            context = {
-                'latest_food_items': food_list,
-                'add_form': add_item_form, 
-            }
-            return render(request, view, context)
+            return redirect('index') 
 
+    # Get a list of food based on specific user that is logged in
+    # Display items eaten today 
+    food_list = FoodItem.objects.filter(
+            user_id=request.user, 
+            date_added__gte=datetime.datetime.today().replace(hour=0, minute=0).astimezone()
+    )    
+    # Create forms for page
+    add_item_form = AddItem()
+    view_items_by_date = ViewItemsByDate()
+
+    # Get input
+    show_by = request.GET.get('field')
+    # Handle view items by date form
+    if show_by == 'yesterday':
+        food_list = ['Cheese', 'Fake cheese', 'Item']             
     context = {
         'latest_food_items': food_list,
-        'add_form': add_item_form, 
-    }            
+        'add_form': add_item_form,
+        'view_by_date_form': view_items_by_date, 
+    }
+    return render(request, 'food/index.html', context)
 
-    return render(request, view, context)
+
 
 
 
