@@ -47,9 +47,9 @@
                           type="submit" >Go
                       </button>
                   </form>
-                  <ul>
+                  <ul class="list-group mt-5 mb-5">
                   {% for item in latest_food_items %}
-                      <li>{{ item.item }}</li>
+                  <li class="list-group-item list-group-item-secondary text-center">{{ item.item }}  {{item.date_added}}</li>
                   {% endfor %}
                   </ul>
               </div>
