@@ -30,27 +30,15 @@ def add_post(request):
 @login_required(login_url='/food/login/')
 def index(request):
         
-    # Handle add items by date form
-    add_post(request)
-
-    # Query db for all food items 
-    # Display items eaten today
-    food_list = FoodItem.objects.filter(
-            user_id=request.user, 
-            date_added__gte=datetime.datetime.today().replace(hour=0, minute=0).astimezone() - timedelta(0),
-            date_added__lte=datetime.datetime.today().replace(hour=0, minute=0).astimezone() - timedelta(-1),
-    ).order_by('-date_added')    
-
     # Create forms for page
     add_item_form = AddItem()
     view_items_by_date = ViewItemsByDate()
-    # Get input
-    show_by = request.GET.get('field')
 
+    # Update db with new food item
     item_post(request)
 
-    # view food by date given
-    food_list = view_by_date(request, food_list)
+    # View food by date given
+    food_list = view_by_date(request)
 
     context = {
         'latest_food_items': food_list,
@@ -80,6 +68,7 @@ def profile(request):
     } 
 
     return render(request, view, context)
+
 
 
 """
@@ -127,27 +116,24 @@ def profile_post(request, user_info):
 
 
 
-# Profile view w/ required login
-@login_required(login_url='/food/login/')
-def profile(request):
-    # Make query to get user info
-    user_info = UserProfile.objects.filter(user_id=request.user).first()
-    # Handle post request
-    profile_post(request, user_info)
-    # Create form 
-    form_data = EditProfile()
-    # Calculate BMI, and pass data back 
-    context = { 
-            'bmi': get_bmi(user_info.height, user_info.weight),
-            'user_data_form': form_data,
-            'user_info': user_info,
-    } 
-
-    return render(request, 'food/profile.html', context)
+# Allow user to remove any given item from list
+def remove_item(request):
+    pass
 
 
-def view_by_date(request, food_list):
+# Display food items by given date
+def view_by_date(request):
+   
+    # Today is default
+    food_list = FoodItem.objects.filter(
+            user_id=request.user, 
+            date_added__gte=datetime.datetime.today().replace(hour=0, minute=0).astimezone() - timedelta(0),
+            date_added__lte=datetime.datetime.today().replace(hour=0, minute=0).astimezone() - timedelta(-1),
+    ).order_by('-date_added')    
+
+    # Get user input
     show_by = request.GET.get('field')
+
     # Handle view items by date form
     if show_by == 'yesterday':
         food_list = FoodItem.objects.filter(
@@ -155,7 +141,8 @@ def view_by_date(request, food_list):
             date_added__gte=datetime.datetime.today().replace(hour=0, minute=0).astimezone() - timedelta(1),
             date_added__lte=datetime.datetime.today().replace(hour=0, minute=0).astimezone() - timedelta(0)
         ).order_by('-date_added')    
-    
+   
+    # Items eaten in the last week
     if show_by =='last-week':
         food_list = FoodItem.objects.filter(
             user_id=request.user, 
