@@ -13,7 +13,6 @@ $('.edit-profile-submit').on('click', function() {
     $('.edit-profile').addClass('d-none')
 });
 
-
 // Add current datetime to input field
 $('.add-time-now').on('click', function() {
     $('#id_date_added').val(moment().format('Y-MM-DD HH:mm'))
