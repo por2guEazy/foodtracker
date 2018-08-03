@@ -23,12 +23,18 @@
           <div class="container">
             <a href="{% url 'profile' %}">{{ user.get_username }}'s profile</a>
           </div>
-            <a href="logout" ><button type="submit" class="btn btn-outline-secondary float-right">Logout</button> </a>
+            <a href="logout" >
+                <button type="submit" class="btn btn-outline-secondary float-right">
+                    Logout
+                </button> </a>
         </nav>
       <div class="jumbotron jumbotron-fluid">
           <div class="container-fluid">
               <h1 class="display-4">Track the food that {{user.get_username }} has eaten</h1>
-                <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                <p class="lead">
+                This is a modified jumbotron that occupies the entire 
+                horizontal space of its parent.
+                </p>
           </div>
       </div>
       <div class="container">
@@ -37,7 +43,8 @@
                   <h4>ITEMS EATEN</h4>
                   <form method="get">
                       {{ view_by_date_form }}
-                      <button class="add-time-now btn btn-outline-secondary" type="button" >Go
+                      <button class="display-items-submit btn btn-outline-secondary btn-sm" 
+                          type="submit" >Go
                       </button>
                   </form>
                   <ul>
@@ -50,14 +57,15 @@
                   <h4>Add Items to List</h4>
                   {% csrf_token %}
                   {{ add_form }}
-                  <button class="add-time-now btn btn-outline-secondary" type="button" >Now</button>
+                  <button class="add-time-now btn btn-outline-secondary" 
+                      type="button" >Now</button>
                   <div class="mt-5">
-                      <button type="submit" class="btn btn-outline-secondary">Add Food Item</button>
+                      <button type="submit" 
+                          class="btn btn-outline-secondary">Add Food Item</button>
                   </div>
               </form>
           </div>
       </div>
-    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

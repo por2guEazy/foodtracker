@@ -9,7 +9,6 @@ from .forms import AddItem, EditProfile, ViewItemsByDate
 from .models import FoodItem, UserProfile
 
 
-<<<<<<< HEAD
 # Handle the post request and save to db
 def add_post(request):
     if request.method == 'POST':
@@ -30,12 +29,6 @@ def index(request):
         
     # Handle add items by date form
     add_post(request)
-=======
-# Index view - required login 
-@login_required(login_url='/food/login/')
-def index(request):
-    view = 'food/index.html'
->>>>>>> parent of 2f56b25... Code cleanup in views.
     # Get a list of food based on specific user that is logged in
     # Display items eaten today 
     food_list = FoodItem.objects.filter(date_added__range=(start, end))
@@ -46,7 +39,6 @@ def index(request):
     # Create forms for page
     add_item_form = AddItem()
     view_items_by_date = ViewItemsByDate()
-<<<<<<< HEAD
     # Get input
     show_by = request.GET.get('field')
 
@@ -62,43 +54,6 @@ def index(request):
     }
 
     return render(request, 'food/index.html', context)
-=======
-   
-    # Get input
-    show_by = request.GET.get('')
-    print(view_items_for)
-    # Handle view items by date form
-    if request.method == 'GET':
-        context = {
-            'latest_food_items': food_list,
-            'add_form': add_item_form,
-            'view_by_date_form': view_items_by_date, 
-        }
-        return render(request, view, context)
-
-    
-    # Handle add items by date form
-    if request.method == 'POST':
-        add_item_form = AddItem(request.POST)
-        # Validate data
-        if add_item_form.is_valid():
-            item =  add_item_form.save(commit=False)
-            item.user = request.user
-            item.save()
-            
-            context = {
-                'latest_food_items': food_list,
-                'add_form': add_item_form, 
-            }
-            return render(request, view, context)
-
-    context = {
-        'latest_food_items': food_list,
-        'add_form': add_item_form, 
-    }            
-
-    return render(request, view, context)
->>>>>>> parent of 2f56b25... Code cleanup in views.
 
 
 
