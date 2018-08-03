@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-
+import string
 import datetime
-from datetime import date, timedelta
+from datetime import timedelta
 from django.utils import timezone
 
 from .forms import AddItem, EditProfile, ViewItemsByDate
@@ -29,11 +29,13 @@ def index(request):
         
     # Handle add items by date form
     add_post(request)
+
     # Get a list of food based on specific user that is logged in
     # Display items eaten today 
-    food_list = FoodItem.objects.filter(date_added__range=(start, end))
-
     food_list = FoodItem.objects.filter(
+            user_id=request.user, 
+            date_added__gte=datetime.datetime.today().replace(hour=0, minute=0).astimezone()    
+    ).order_by('-date_added')
 
 
     # Create forms for page
@@ -43,7 +45,12 @@ def index(request):
     show_by = request.GET.get('field')
 
     # Handle view items by date form
-#    if show_by == 'yesterday':
+   # if show_by == 'yesterday':
+   #     food_list = FoodItem.objects.filter(
+   #                 user_id=request.user, 
+   #                 date_added__gte=(datetime.datetime.today()-timedelta(days=1) ).replace(hour=0, minute=0).astimezone()    
+   #         ).order_by('-date_added')
+
 
 
     # Pass data back
