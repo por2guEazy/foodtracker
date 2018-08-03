@@ -13,7 +13,8 @@
             </form>
             <ul class="list-group mt-5 mb-5 mr-5">
             {% for item in latest_food_items %}
-            <li class="list-group-item list-group-item-secondary text-center">{{ item.item }}{{item.date_added}}
+            <!-- I added the date for debugging purposes, will remove later -->
+            <li class="list-group-item list-group-item-secondary text-center">{{ item.item }} -- {{item.date_added}}
                 <form method="post" action="{% url 'remove_item' item.id %}">
                     {% csrf_token %}
                     <button type="submit" class="rmv-item d-none btn btn-outline-danger btn-sm float-right ">Delete</button>

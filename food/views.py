@@ -109,9 +109,9 @@ def profile_post(request, user_info):
 
 # Allow user to remove any given item from list
 def remove_item(request, pk):
-
+    # Get the item by PK
     item = get_object_or_404(FoodItem, pk=pk)
-
+    # Delete specific item
     if request.method == 'POST':
         item.delete()
         
