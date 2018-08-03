@@ -1,25 +1,14 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-import string
+from django.shortcuts import get_object_or_404, render, redirect
+
 import datetime
 from datetime import timedelta
 from django.utils import timezone
 
+
 from .forms import AddItem, EditProfile, ViewItemsByDate
 from .models import FoodItem, UserProfile
 
-
-# Handle the post request and save to db
-def add_post(request):
-    if request.method == 'POST':
-        add_item_form = AddItem(request.POST)
-        # Validate data
-        if add_item_form.is_valid():
-            item =  add_item_form.save(commit=False)
-            item.user = request.user
-            item.save()
-            
-            return redirect('index') 
 
 
 """ 
@@ -36,6 +25,8 @@ def index(request):
 
     # Update db with new food item
     item_post(request)
+
+
 
     # View food by date given
     food_list = view_by_date(request)
@@ -117,8 +108,16 @@ def profile_post(request, user_info):
 
 
 # Allow user to remove any given item from list
-def remove_item(request):
-    pass
+def remove_item(request, pk):
+
+    item = get_object_or_404(FoodItem, pk=pk)
+
+    if request.method == 'POST':
+        item.delete()
+        
+        return redirect('index')
+
+
 
 
 # Display food items by given date
