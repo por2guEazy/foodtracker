@@ -14,12 +14,12 @@
             <ul class="list-group mt-5 mb-5 mr-5">
             {% for item in latest_food_items %}
             <!-- I added the date for debugging purposes, will remove later -->
-            <li class="list-group-item list-group-item-secondary text-center">{{ item.item }} -- {{item.date_added}}
-                <form method="post" action="{% url 'remove_item' item.id %}">
-                    {% csrf_token %}
+                <li class="list-group-item list-group-item-secondary text-center">{{ item.item }} -- {{item.date_added}}
+                    <form class="mb-0" method="post" action="{% url 'remove_item' item.id %}">
+                        {% csrf_token %}
                     <button type="submit" class="rmv-item d-none btn btn-outline-danger btn-sm float-right ">Delete</button>
-                </form>
-            </li>
+                    </form>
+                </li>
             {% endfor %}
             </ul>
             <button class="edit-list btn btn-outline-secondary btn-sm float-right mr-5">Edit List</button>

@@ -14,6 +14,8 @@ class UserProfile(models.Model):
 # Model for food eaten item to add to list
 # Add more fields later to better classify
 class FoodItem(models.Model):
+    amount = models.PositiveIntegerField(default=0)
+    calories = models.PositiveIntegerField(default=0)
     item = models.CharField(max_length=50)
     date_added = models.DateTimeField('Date Added')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
