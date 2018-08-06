@@ -32,7 +32,7 @@
         <form class="col" method="post" action="{% url 'index' %}">
             <h4>Add Items to List</h4>
               {% csrf_token %}
-              {{ add_form.as_ul}}
+              {{ add_form }}
             <button class="add-time-now btn btn-outline-secondary" 
                   type="button" >Now</button>
             <div class="mt-5 float-right">
