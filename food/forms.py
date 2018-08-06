@@ -10,7 +10,7 @@ class AddItem(ModelForm):
     class Meta:
         model = FoodItem
         widgets = {'date_added': DateTimeInput(attrs={'class': 'datepicker'})}
-        fields = ['item', 'date_added']
+        fields = ['item', 'amount', 'calories', 'date_added']
 
 
 

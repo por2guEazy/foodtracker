@@ -8,6 +8,7 @@
             <p>Height: {{ user_info.height }}"</p>
             <p>Weight: {{ user_info.weight }} lbs</p>
             <p>BMI: {{ bmi }}</p>
+            <img src="{{ user.user_profile.profile_pic.url }}" width="240">
             <button class="btn btn-secondary show-edit-profile"> Edit</button>
       </div>
       <form class="col d-none edit-profile" method="post">
