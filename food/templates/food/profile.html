@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block body %}
 <div class="container">
   <div class="row">
@@ -8,14 +8,14 @@
             <p>Height: {{ user_info.height }}"</p>
             <p>Weight: {{ user_info.weight }} lbs</p>
             <p>BMI: {{ bmi }}</p>
-            <img src="{{ user.user_profile.profile_pic.url }}" width="240">
+            <img src="{% static 'food/placeholder-profile-pic.png' %}" width="240" height="240">
             <button class="btn btn-secondary show-edit-profile"> Edit</button>
       </div>
       <form class="col d-none edit-profile" method="post">
       <h2> Update Info </h2>
           {% csrf_token %}
           {{ user_data_form.as_p }} 
-          <button class="btn btn-secondary edit-profile-submit" type="submit">OK</button>
+          <button class="btn btn-primary edit-profile-submit" type="submit">OK</button>
       </form>
   </div>
 </div>

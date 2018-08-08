@@ -7,12 +7,12 @@
             <h4>ITEMS EATEN</h4>
             <form method="get">
             {{ view_by_date_form }}
-                <button class="display-items-submit btn btn-outline-secondary btn-sm" 
+                <button class="display-items-submit btn btn-outline-primary btn-sm" 
                     type="submit" >Go
                 </button>
             </form>
             <button class="edit-list btn btn-outline-secondary btn-sm float-right mr-5">Edit List</button>
-            <button class="edit-list-done btn btn-outline-secondary btn-sm float-right mr-5 d-none">Done</button>
+            <button class="edit-list-done btn btn-secondary btn-sm float-right mr-5 d-none">Done</button>
             <ul class="list-group mt-5 mb-5 mr-5">
             {% for item in latest_food_items %}
             <!-- I added the date for debugging purposes, will remove later -->
@@ -36,7 +36,7 @@
             <button class="add-time-now btn btn-outline-secondary" 
                   type="button" >Now</button>
             <div class="mt-5 float-right">
-                <button type="submit" class="btn btn-outline-secondary">Add Food Item</button>
+                <button type="submit" class="btn btn-outline-primary">Add Food Item</button>
             </div>
         </form>
     </div>

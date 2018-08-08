@@ -19,7 +19,7 @@ class AddItem(ModelForm):
 class EditProfile(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['height', 'weight']
+        fields = ['height', 'weight', 'image']
 
 
 

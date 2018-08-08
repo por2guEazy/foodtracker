@@ -6,7 +6,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     height = models.PositiveIntegerField()
     weight = models.PositiveIntegerField()
-    profile_pic = models.ImageField(upload_to='profile_image', blank=True)
+    image = models.ImageField(upload_to='profile_image', blank=True)
 
     def __str__(self):
         return '%s %s' % (self.height, self.weight)
