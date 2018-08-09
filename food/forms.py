@@ -13,8 +13,6 @@ class AddItem(ModelForm):
         fields = ['item', 'amount', 'calories', 'date_added']
 
 
-
-
 # Enter user info
 class EditProfile(ModelForm):
     class Meta:
@@ -22,8 +20,9 @@ class EditProfile(ModelForm):
         fields = ['height', 'weight', 'image']
 
 
-
 # Select menu to view items by choice
 class ViewItemsByDate(forms.Form):
     options = (('today', 'Today'), ('yesterday', 'Yesterday'), ('last-week', 'Last Week'))
     field = forms.ChoiceField(label='', choices=options)
+
+

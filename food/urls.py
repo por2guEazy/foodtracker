@@ -9,15 +9,11 @@ from django.contrib.auth.views import login, logout
 from . import views
 
 
-#app_name = 'items'
-
-
 urlpatterns = [
     path('', views.index, name='index'),
     path('profile/', views.profile, name='profile'),
     url(r'^login/$', login, {'template_name': 'food/login.html'}),
     url(r'^logout/$', logout, {'next_page': '/food/login'}),
     url(r'^delete/(?P<pk>[0-9]+)/$', views.remove_item, name='remove_item'),
-] 
-# This will be used later to server images
-# + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

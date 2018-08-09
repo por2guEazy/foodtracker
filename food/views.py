@@ -6,9 +6,8 @@ from datetime import timedelta
 from django.utils import timezone
 
 
-from .forms import AddItem, EditProfile, ViewItemsByDate
+from .forms import AddItem, EditProfile, ViewItemsByDate 
 from .models import FoodItem, UserProfile
-
 
 
 """ 
@@ -96,7 +95,7 @@ def item_post(request):
 def profile_post(request, user_info):
     if request.method == 'POST':
         # Check if that instance exists, update or save new data
-        form_data = EditProfile(request.POST, instance=user_info)
+        form_data = EditProfile(request.POST, request.FILES, instance=user_info)
         # Validate data
         if form_data.is_valid():
             item =  form_data.save(commit=False)

@@ -3,15 +3,19 @@
 {% block body %}
 <div class="container">
   <div class="row">
-      <div class="col">
+      <div class="col-4 shadow p-3">
           <h2> Personal Info: {{ user }} </h2> 
             <p>Height: {{ user_info.height }}"</p>
             <p>Weight: {{ user_info.weight }} lbs</p>
             <p>BMI: {{ bmi }}</p>
-            <img src="{% static 'food/placeholder-profile-pic.png' %}" width="240" height="240">
-            <button class="btn btn-secondary show-edit-profile"> Edit</button>
+            <button class="btn btn-secondary show-edit-profile mb-2"> Edit</button>
       </div>
-      <form class="col d-none edit-profile" method="post">
+      <div class="col-4 shadow p-3 text-center ">
+          <img src="{{ user.userprofile.image.url }}" width="240" height="auto"
+            class="m-3 rounded">
+      </div>
+      <form class="col-4 d-none edit-profile shadow p-3" method="post" enctype="multipart/form-data"
+          action="{% url 'profile' %}">
       <h2> Update Info </h2>
           {% csrf_token %}
           {{ user_data_form.as_p }} 

@@ -6,10 +6,10 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     height = models.PositiveIntegerField()
     weight = models.PositiveIntegerField()
-    image = models.ImageField(upload_to='profile_image', blank=True)
+    image = models.ImageField(upload_to='static/food/media/')
 
     def __str__(self):
-        return '%s %s' % (self.height, self.weight)
+        return '%s' % (self.user)
 
 
 # Model for food eaten item to add to list
