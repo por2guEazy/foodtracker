@@ -18,7 +18,7 @@
           {% if user.is_authenticated %}
           <div class="row"> 
               <a class="col mr-5 text-align-bottom" href="{% url 'profile' %}">
-                  <img src="{% static 'food/placeholder-profile-pic.png' %}" width="48" height="48" class="rounded mr-2">
+                  <img src="{{ user.userprofile.image.url }}" width="48" height="48" class="rounded-circle mr-2">
                   {{ user.get_username }}'s profile</a>
               <a href="logout" ><button type="submit" class="col btn btn-primary float-right mr-2">Logout</button> </a>
           </div>
