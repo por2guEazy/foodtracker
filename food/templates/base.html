@@ -15,7 +15,8 @@
 
   <body>
       <nav class="navbar navbar-dark bg-dark container-fluid">
-          <a href="{% url 'index' %}"><span class="navbar-brand mb-0 h1">FOOD TRACKER</span> </a>
+          <a href="{% url 'index' %}"><i class="fas fa-home fa-3x"></i> </a>
+          <h1 class="text-white">FOOD TRACKER</h1>
           {% if user.is_authenticated %}
           <div class="row"> 
               <a class="col mr-5 text-align-bottom" href="{% url 'profile' %}">

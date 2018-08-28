@@ -3,7 +3,7 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col shadow p-3">
             <h4>ITEMS EATEN</h4>
             <form method="get">
             {{ view_by_date_form }}
@@ -29,15 +29,14 @@
             {% endfor %}
             </ul>
         </div>
-        <form class="col" method="post" action="{% url 'index' %}">
+        <form class="col shadow p-3 pl-5" method="post" action="{% url 'index' %}">
             <h4>Add Items to List</h4>
               {% csrf_token %}
               {{ add_form.as_p }}
-                <button class="add-time-now btn btn-outline-secondary" 
-                    type="button" >Now</button>
-            <div class="mt-5 float-right">
-                <button type="submit" class="btn btn-outline-primary">Add Food Item</button>
-            </div>
+            <button class="add-time-now btn btn-outline-secondary" type="button" >
+                Now
+            </button>
+            <button type="submit" class="btn btn-outline-primary">Add Food Item</button>
         </form>
     </div>
 </div>
