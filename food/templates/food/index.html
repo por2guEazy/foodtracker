@@ -17,10 +17,10 @@
             {% for item in latest_food_items %}
             <!-- I added the date for debugging purposes, will remove later -->
             <li class="list-group-item list-group-item-secondary text-center">
-                <b>Item:</b> {{ item.item }} 
-                <b>Date:</b> {{item.date_added}} 
-                <b>Cal:</b> {{item.calories}} 
-                <b>Amount:</b> {{item.amount}}
+                <b>Item:</b> {{ item.item }} <br />
+                <b>Date:</b> {{item.date_added}} <br />
+                <b>Cal:</b> {{item.calories}} <br />
+                <b>Amount:</b> {{item.amount}}<br />
                     <form class="mb-0" method="post" action="{% url 'remove_item' item.id %}">
                         {% csrf_token %}
                         <button type="submit" class="rmv-item d-none btn btn-outline-danger btn-sm float-right ">Delete</button>
@@ -32,9 +32,9 @@
         <form class="col" method="post" action="{% url 'index' %}">
             <h4>Add Items to List</h4>
               {% csrf_token %}
-              {{ add_form }}
-            <button class="add-time-now btn btn-outline-secondary" 
-                  type="button" >Now</button>
+              {{ add_form.as_p }}
+                <button class="add-time-now btn btn-outline-secondary" 
+                    type="button" >Now</button>
             <div class="mt-5 float-right">
                 <button type="submit" class="btn btn-outline-primary">Add Food Item</button>
             </div>
